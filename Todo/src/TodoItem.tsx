@@ -1,21 +1,21 @@
-import React from 'react'
+import React from 'react';
 import { TodoType } from './Apptypes';
 
 type PropsType = {
-    task:TodoType;
-    deleteTask(nameToDelete:string):void
+  task: TodoType;
+  deleteTask(nameToDelete: string): void;
 };
 
-function TodoItem({task,deleteTask}:PropsType) {
+function TodoItem({ task, deleteTask }: PropsType) {
   return (
-    <div>
+    <div className="card">
       <div>
         <p>{task.taskName}</p>
         <p>{task.workDay}</p>
-        <button onClick={()=>deleteTask(task.taskName)}>Sil</button>
+        <button onClick={() => deleteTask(task.taskName)}>Sil</button>
       </div>
     </div>
-  )
+  );
 }
 
-export default TodoItem
+export default TodoItem;

@@ -1,5 +1,4 @@
 export type TodoType = {
-    taskName:string;
-    workDay:number;
-
-  };
+  taskName: string;
+  workDay: number;
+};

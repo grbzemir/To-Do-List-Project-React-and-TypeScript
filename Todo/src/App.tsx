@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { TodoType } from './Apptypes';
 
 import './App.css';
+import TodoItem from './TodoItem';
 
 const App: FC = () => {
   const [task, setTask] = useState<string>('');
@@ -16,14 +17,15 @@ const App: FC = () => {
     {
       setTask(event.target.value);
     } 
-    else
+    else 
     {
       setWorkDay(Number(event.target.value));
     }
 
-};
+  };
 
-  const addNewTask = ():void => {
+  const addNewTask = (): void => 
+  {
     const newTask = { taskName: task, workDay: workDay };
     setTodoList([...todoList, newTask]);
     setTask('');
@@ -31,10 +33,19 @@ const App: FC = () => {
 
   };
 
+  const deleteTask = (nameToDelete: string): void => {
+    setTodoList(
+      todoList.filter((task) => {
+        return task.taskName !== nameToDelete;
+      })
+    );
+  };
+
   return (
     <div className="App">
-      <div>
+      <div className="maincard">
         <input
+          className="maincardinput"
           type="text"
           value={task}
           name="task"
@@ -43,23 +54,23 @@ const App: FC = () => {
         />
         <input
           type="number"
+          className="maincardinput"
           value={workDay}
           name="workDay"
           placeholder="Kaç günde tamamlamamlısınız"
           onChange={handleChange}
         />
-        <button onClick={addNewTask}>Yeni Task Ekle</button>
+        <button className="maincardbutton" onClick={addNewTask}>
+          Yeni Task Ekle
+        </button>
       </div>
-      <div>
-        {
-        todoList.map((task:TodoType , index:number) => {
-           return <TodoItem key={index} task={task} />;
-          }
+      <div className="todocart">
+        {todoList.map((task: TodoType, index: number) => {
+          return <TodoItem key={index} task={task} deleteTask={deleteTask} />;
+        })}
       </div>
     </div>
-
   );
-
 };
 
 export default App;
