@@ -1,50 +1,65 @@
-import React,{FC} from 'react'
-import './App.css'
-import { useState } from 'react'
-import { TodoType } from './Apptypes'
+import React, { ChangeEvent, FC } from 'react';
+import { useState } from 'react';
+import { TodoType } from './Apptypes';
+
+import './App.css';
 
 const App: FC = () => {
-
-
-
-
   const [task, setTask] = useState<string>('');
   const [workDay, setWorkDay] = useState<number>(0);
-  const [todoList , setTodoList] = useState<TodoType[]>([]);
+  const [todoList, setTodoList] = useState<TodoType[]>([]);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  console.log(todoList);
 
-    if(event.target.name === "task")
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.name === 'task') 
     {
-      setTask(event.target.value)
-    }
+      setTask(event.target.value);
+    } 
     else
     {
-      setWorkDay(parseInt(event.target.value))
+      setWorkDay(Number(event.target.value));
     }
-    console.log(task);
-    console.log(workDay);
-  }
+
+};
+
+  const addNewTask = () => {
+    const newTask = { taskName: task, workDay: workDay };
+    setTodoList([...todoList, newTask]);
+    setTask('');
+    setWorkDay(0);
+
+  };
 
   return (
     <div className="App">
-     <input type="text" 
-     value={task} 
-     name="task"
-     placeholder="Taskınızı Giriniz" 
-     onChange={handleChange}
-     />
+      <div>
+        <input
+          type="text"
+          value={task}
+          name="task"
+          placeholder="Taskınızı giriniz..."
+          onChange={handleChange}
 
-     <input type="number" 
-     value={workDay}
-     name="workDay"
-     placeholder="Kaç günde tamamlamalısınız"
-     onChange={handleChange}
-     />
-     <button>Yeni Task Ekle</button>
+        />
+
+        <input
+          type="number"
+          value={workDay}
+          name="workDay"
+          placeholder="Kaç günde tamamlamamlısınız"
+          onChange={handleChange}
+
+        />
+
+        <button onClick={addNewTask}>Yeni Task Ekle</button>
+
+      </div>
 
     </div>
-  )
-}
 
-export default App
+  );
+  
+};
+
+export default App;
