@@ -23,7 +23,7 @@ const App: FC = () => {
 
 };
 
-  const addNewTask = () => {
+  const addNewTask = ():void => {
     const newTask = { taskName: task, workDay: workDay };
     setTodoList([...todoList, newTask]);
     setTask('');
@@ -40,26 +40,26 @@ const App: FC = () => {
           name="task"
           placeholder="Taskınızı giriniz..."
           onChange={handleChange}
-
         />
-
         <input
           type="number"
           value={workDay}
           name="workDay"
           placeholder="Kaç günde tamamlamamlısınız"
           onChange={handleChange}
-
         />
-
         <button onClick={addNewTask}>Yeni Task Ekle</button>
-
       </div>
-
+      <div>
+        {
+        todoList.map((task:TodoType , index:number) => {
+           return <TodoItem key={index} task={task} />;
+          }
+      </div>
     </div>
 
   );
-  
+
 };
 
 export default App;
